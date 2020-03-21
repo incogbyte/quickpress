@@ -10,7 +10,7 @@ Small tool to automate SSRF wordpress and XMLRPC finder
   * ./quickpress.go -target https://www.target.com -server evil.com
   
 * Example
-  ![](https://raw.githubusercontent.com/t0gu/quickpress/master/quickpress.gif)
+  ![](https://raw.githubusercontent.com/t0gu/quickpress/master/qf.gif)
 
 
 # TODO
