@@ -11,3 +11,8 @@ Small tool to automate SSRF wordpress and XMLRPC finder
   
 * Example
   ![](https://raw.githubusercontent.com/t0gu/quickpress/master/quickpress.gif)
+
+
+# TODO
+1 - Pass wordlist with targets to test
+2 - Maybe brute force module.. 
