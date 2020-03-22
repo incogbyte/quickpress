@@ -14,5 +14,5 @@ Small tool to automate SSRF wordpress and XMLRPC finder
 
 
 # TODO
-1- Pass wordlist with targets to test
-2- Maybe brute force module.. 
+1. Pass wordlist with targets to test
+2. Maybe brute force module.. 
