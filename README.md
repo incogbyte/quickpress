@@ -1,6 +1,7 @@
 # quickpress
 Small tool to automate SSRF wordpress and XMLRPC finder
 
+* DNS resolution it's not a SSRF :P 
 
 
 
