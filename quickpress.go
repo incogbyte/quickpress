@@ -10,23 +10,31 @@ import (
 )
 
 func main() {
-
-	utils.Banner()
-	target := flag.String("target", "", ">> target url (e.g: https://wordpress.com)")
-	server := flag.String("server", "", ">> server to receive connections SSRF test")
+	banner := utils.UglyBanner()
+	fmt.Println(banner)
+	target := flag.String("target", "", "[-] (e.g: https://wordpress.site.com)")
+	server := flag.String("server", "", "[-] (e.g: http://159.89.121.20 or http://mydomain.com")
 	flag.Parse()
 
-	if *target == "" {
-		fmt.Printf(">> Usage: quickpress -target https://wordpress.com -server myserver.com\n")
+	serverUser := *server
+	targetUser := *target
+
+	if serverUser == "" {
+		fmt.Println("[+] Server is required to test ssrf..")
+		fmt.Println("./quickpress -server http://burpcollaborator.net")
 		os.Exit(1)
 	}
 
-	if *server == "" {
-		fmt.Printf("Server is required \n")
+	targetStruct := core.New(targetUser, serverUser)
+
+	//verify if data is from stdin
+	file, _ := os.Stdin.Stat()
+	if (file.Mode() & os.ModeCharDevice) == 0 {
+		targetStruct.FromStdin()
+	} else {
+		if targetStruct.IsAlive(targetUser) {
+			targetStruct.VerifyMethods(targetUser)
+		}
 	}
 
-	quickpressTarget := core.New(*target)
-	quickpressTarget.XMLRPCTest()
-	quickpressTarget.TestSSRF(*server)
-	quickpressTarget.TestSSRFProxy(*server)
 }
