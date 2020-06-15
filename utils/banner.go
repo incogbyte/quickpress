@@ -1,19 +1,23 @@
 package utils
 
-import "fmt"
+const author string = "[+]Author:t0gu\n"
+const version string = "[+]Version: 1.1\n\n"
 
-//Banner prints banner
-func Banner() {
+//UglyBanner banner
+func UglyBanner() string {
 
-	banner := `
+	var banner string = `
+	
 
-	author: t0gu
-	twitter: @t0guu
+██╗  ██╗███╗   ███╗██╗     ██████╗ ██████╗  ██████╗ ███████╗ ██████╗ █████╗ ███╗   ██╗
+╚██╗██╔╝████╗ ████║██║     ██╔══██╗██╔══██╗██╔════╝ ██╔════╝██╔════╝██╔══██╗████╗  ██║
+ ╚███╔╝ ██╔████╔██║██║     ██████╔╝██████╔╝██║█████╗███████╗██║     ███████║██╔██╗ ██║
+ ██╔██╗ ██║╚██╔╝██║██║     ██╔══██╗██╔═══╝ ██║╚════╝╚════██║██║     ██╔══██║██║╚██╗██║
+██╔╝ ██╗██║ ╚═╝ ██║███████╗██║  ██║██║     ╚██████╗ ███████║╚██████╗██║  ██║██║ ╚████║
+╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚═╝      ╚═════╝ ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝                                                                       	
 
-	\ʕ◔ϖ◔ʔ/
 
-	Usage: quickpress -target https://foo.bar -server evil.com
-	`
-
-	fmt.Println(banner)
+`
+	returnBanner := banner + author + version
+	return returnBanner
 }
