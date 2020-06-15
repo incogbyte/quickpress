@@ -10,9 +10,9 @@ Compiling by yourself
 
 ```bash
 git clone https://github.com/t0gu/quickpress.git
-cd xmlrpc-scan
-go build -o xmlrpcscan
-./xmlrpcscan
+cd quickpress
+go build -o quickpress
+./quickpress
 ```
 
 ##### Usage
