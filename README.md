@@ -1,4 +1,4 @@
-# xmlrpc-scan
+# quickpress
 
 Scan urls or a single URL against XMLRPC wordpress issues.
 
@@ -19,12 +19,12 @@ go build -o xmlrpcscan
 
 * List of URLS
 ```bash
-cat urls.txt | xmlrpcscan -server http://burpcollaborator.net
+cat urls.txt | quickpress -server http://burpcollaborator.net
 ```
 
 * Single URL
 ```bash
-xmlrpcscan -target https://target.com -server http://burpcollaborator.net
+quickpress -target https://target.com -server http://burpcollaborator.net
 ```
 
 
