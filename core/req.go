@@ -33,6 +33,7 @@ func New(t string, s string) *Scan {
 }
 
 func newClient() *http.Client {
+	//tr = transport
 	tr := &http.Transport{
 		MaxIdleConns:    30,
 		IdleConnTimeout: time.Second,
@@ -167,9 +168,12 @@ func (s *Scan) VerifyMethods(url string) {
 func (s *Scan) Ssrf(target string) {
 	url := target + "/xmlrpc.php"
 
+	// tracking where de ssrf come from
+	myServer := target + s.server
+
 	xml := utils.SSRF
 
-	replaceServer := strings.ReplaceAll(xml, "$SERVER$", s.server)
+	replaceServer := strings.ReplaceAll(xml, "$SERVER$", myServer)
 	replaceTarget := strings.ReplaceAll(replaceServer, "$TARGET$", target)
 
 	body := replaceTarget
@@ -200,7 +204,7 @@ func (s *Scan) Ssrf(target string) {
 func (s *Scan) ProxyTesting() {
 	client := newClient()
 
-	url := s.target + "/wp-json/oembed/1.0/proxy?url=" + s.server + "/nullfil3"
+	url := s.target + "/wp-json/oembed/1.0/proxy?url=" + s.server + "/v4lak"
 
 	req, err := http.NewRequest("GET", url, nil)
 	req.Header.Set("User-Agent", ua)

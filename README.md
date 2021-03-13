@@ -6,6 +6,11 @@ usage:
 
 ##### Install
 
+```bash
+# dependencies
+$ go get github.com/fatih/color
+
+```
 Compiling by yourself
 
 ```bash
@@ -27,6 +32,3 @@ cat urls.txt | quickpress -server http://burpcollaborator.net
 quickpress -target https://target.com -server http://burpcollaborator.net
 ```
 
-
-#Todo
---> Tracking where ssrf request come from, when vulnerable.
