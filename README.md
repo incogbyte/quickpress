@@ -9,7 +9,7 @@ usage:
 Compiling by yourself
 
 ```bash
-git clone https://github.com/t0gu/quickpress.git
+git clone https://github.com/v4lak/quickpress.git
 cd quickpress
 go build -o quickpress
 ./quickpress
