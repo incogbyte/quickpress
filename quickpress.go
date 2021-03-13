@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"./core"
-	"./utils"
+	"github.com/v4lak/quickpress/core"
+	"github.com/v4lak/quickpress/utils"
 )
 
 func main() {

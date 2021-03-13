@@ -15,8 +15,8 @@ import (
 	"sync"
 	"time"
 
-	"../utils"
 	"github.com/fatih/color"
+	"github.com/v4lak/quickpress/utils"
 )
 
 const ua = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0 - github.com/v4lak)"
@@ -81,6 +81,7 @@ func (s *Scan) IsAlive(url string) bool {
 	cli := newClient()
 
 	urlRequest := url + "/xmlrpc.php"
+	fmt.Printf("[*] Verify [%s]\n", urlRequest)
 	req, err := http.NewRequest("GET", urlRequest, nil)
 	req.Header.Set("User-Agent", ua)
 
@@ -91,6 +92,12 @@ func (s *Scan) IsAlive(url string) bool {
 	resp, err := cli.Do(req)
 	if err != nil {
 		return false
+	}
+
+	if resp.StatusCode != 200 {
+		fmt.Printf("[*] Target [%s] have a bad status code..[%d]\n", url, resp.StatusCode)
+	} else {
+		fmt.Printf("[*] Target [%s] have a cool status code [%d].\n", url, resp.StatusCode)
 	}
 
 	defer resp.Body.Close()
@@ -164,17 +171,38 @@ func (s *Scan) VerifyMethods(url string) {
 
 }
 
+func parseTargetName(s string) string {
+	if strings.Contains(s, "http://") {
+		name := strings.ReplaceAll(s, "http://", "")
+		return name
+	}
+
+	name := strings.ReplaceAll(s, "https://", "")
+	return name
+}
+
+func removeLastSlash(s string) string {
+	target := strings.TrimSuffix(s, "/")
+	return target
+}
+
 //Ssrf testing ssrf if avaliable
 func (s *Scan) Ssrf(target string) {
+
+	targetParsed := removeLastSlash(target)
+
 	url := target + "/xmlrpc.php"
 
-	// tracking where de ssrf come from
-	myServer := target + s.server
+	name := parseTargetName(targetParsed)
+	sv := parseTargetName(s.server)
+
+	parsedServer := "https://" + name + "." + sv
+	fmt.Println(parsedServer)
 
 	xml := utils.SSRF
 
-	replaceServer := strings.ReplaceAll(xml, "$SERVER$", myServer)
-	replaceTarget := strings.ReplaceAll(replaceServer, "$TARGET$", target)
+	replaceServer := strings.ReplaceAll(xml, "$SERVER$", parsedServer)
+	replaceTarget := strings.ReplaceAll(replaceServer, "$TARGET$", targetParsed)
 
 	body := replaceTarget
 
@@ -196,7 +224,7 @@ func (s *Scan) Ssrf(target string) {
 	if resp.StatusCode == 200 {
 		color.Yellow("[*] SSRF testing..\n")
 	}
-	color.Cyan("[+] SSRF TEST DONE at [%s]: verify at [%s] if a HTTP connection was recevied", s.target, s.server)
+	color.Cyan("[+] SSRF TEST DONE at [%s]: verify at [%s] if a HTTP connection was recevied", targetParsed, s.server)
 
 }
 
