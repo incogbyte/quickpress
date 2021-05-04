@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/rodnt/quickpress/core"
-	"github.com/rodnt/quickpress/utils"
+	"github.com/0xc4t/quickpress/core"
+	"github.com/0xc4t/quickpress/utils"
 )
 
 func main() {
