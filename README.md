@@ -14,7 +14,7 @@ $ go get github.com/fatih/color
 Compiling by yourself
 
 ```bash
-git clone https://github.com/rodnt/quickpress.git
+git clone https://github.com/b4ruiO/quickpress.git
 cd quickpress
 go build -o quickpress
 ./quickpress
