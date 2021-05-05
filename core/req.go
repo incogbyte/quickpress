@@ -15,11 +15,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/0xc4t/quickpress/utils"
+	"github.com/b4ruiO/quickpress/utils"
 	"github.com/fatih/color"
 )
 
-const ua = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0 - github.com/0xc4t)"
+const ua = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0 - github.com/b4ruiO)"
 
 //Scan struct
 type Scan struct {
@@ -232,7 +232,7 @@ func (s *Scan) Ssrf(target string) {
 func (s *Scan) ProxyTesting() {
 	client := newClient()
 
-	url := s.target + "/wp-json/oembed/1.0/proxy?url=" + s.server + "/0xc4t"
+	url := s.target + "/wp-json/oembed/1.0/proxy?url=" + s.server + "/b4ruiO"
 
 	req, err := http.NewRequest("GET", url, nil)
 	req.Header.Set("User-Agent", ua)
