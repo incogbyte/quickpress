@@ -15,11 +15,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/b4ruiO/quickpress/utils"
+	"github.com/0xrod/quickpress/utils"
 	"github.com/fatih/color"
 )
 
-const ua = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0 - github.com/b4ruiO)"
+const ua = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0 - github.com/0xrod)"
 
 //Scan struct
 type Scan struct {
