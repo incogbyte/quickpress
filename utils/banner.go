@@ -1,7 +1,7 @@
 package utils
 
-const author string = " [+]Author: b4ruiO\n"
-const version string = " [+]Version: 1.2\n\n"
+const author string = " [+] Author: 0xrod\n"
+const version string = " [+] Version: 1.2\n\n"
 
 //UglyBanner banner
 func UglyBanner() string {
