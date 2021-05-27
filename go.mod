@@ -1,4 +1,4 @@
-module github.com/v4lak/quickpress
+module github.com/0xrod/quickpress
 
 go 1.16
 
