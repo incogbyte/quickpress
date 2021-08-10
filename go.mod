@@ -1,4 +1,4 @@
-module github.com/0xrod/quickpress
+module github.com/incogbyte/quickpress
 
 go 1.16
 
