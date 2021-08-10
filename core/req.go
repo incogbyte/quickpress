@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/r00td3v/quickpress/utils"
+	"github.com/incogbyte/quickpress/utils"
 	"github.com/fatih/color"
 )
 
@@ -84,7 +84,7 @@ func (s *Scan) IsAlive(url string) bool {
 	fmt.Printf("[*] Verify [%s]\n", urlRequest)
 	req, err := http.NewRequest("GET", urlRequest, nil)
 	req.Header.Set("User-Agent", ua)
-	req.Header.Set("X-Custom","github.com/r00td3v")
+	req.Header.Set("X-Custom","github.com/incogbyte")
 
 	if err != nil {
 		return false
@@ -233,7 +233,7 @@ func (s *Scan) Ssrf(target string) {
 func (s *Scan) ProxyTesting() {
 	client := newClient()
 
-	url := s.target + "/wp-json/oembed/1.0/proxy?url=" + s.server + "/b4ruiO"
+	url := s.target + "/wp-json/oembed/1.0/proxy?url=" + s.server + "/incogbyte"
 
 	req, err := http.NewRequest("GET", url, nil)
 	req.Header.Set("User-Agent", ua)
