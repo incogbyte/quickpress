@@ -7,8 +7,8 @@ usage:
 ##### Install
 
 ```bash
-# dependencies
-$ go get github.com/fatih/color
+
+$ go install github.com/incogbyte/quickpress@latest
 
 ```
 Compiling by yourself
@@ -23,7 +23,9 @@ go build -o quickpress
 ##### Usage
 
 * List of URLS
+
 ```bash
+# urls without / at the end of URL!
 cat urls.txt | quickpress -server http://burpcollaborator.net
 ```
 
