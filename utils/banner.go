@@ -1,9 +1,9 @@
 package utils
 
 const author string = " [+] Author: incogbyte\n"
-const version string = " [+] Version: 1.2\n\n"
+const version string = " [+] Version: 1.3\n\n"
 
-//UglyBanner banner
+// UglyBanner banner
 func UglyBanner() string {
 
 	var banner string = `

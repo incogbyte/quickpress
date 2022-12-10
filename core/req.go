@@ -15,19 +15,19 @@ import (
 	"sync"
 	"time"
 
-	"github.com/incogbyte/quickpress/utils"
 	"github.com/fatih/color"
+	"github.com/incogbyte/quickpress/utils"
 )
 
 const ua = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0)"
 
-//Scan struct
+// Scan struct
 type Scan struct {
 	target string
 	server string
 }
 
-//New Create constructor
+// New Create constructor
 func New(t string, s string) *Scan {
 	return &Scan{target: t, server: s}
 }
@@ -55,7 +55,7 @@ func newClient() *http.Client {
 	}
 }
 
-//FromStdin test results from stdin
+// FromStdin test results from stdin
 func (s *Scan) FromStdin() {
 	var wg sync.WaitGroup
 	sc := bufio.NewScanner(os.Stdin)
@@ -75,7 +75,7 @@ func (s *Scan) FromStdin() {
 	wg.Wait()
 }
 
-//IsAlive veirfy if xmlrpc is open
+// IsAlive veirfy if xmlrpc is open
 func (s *Scan) IsAlive(url string) bool {
 
 	cli := newClient()
@@ -84,7 +84,7 @@ func (s *Scan) IsAlive(url string) bool {
 	fmt.Printf("[*] Verify [%s]\n", urlRequest)
 	req, err := http.NewRequest("GET", urlRequest, nil)
 	req.Header.Set("User-Agent", ua)
-	req.Header.Set("X-Custom","github.com/incogbyte")
+	req.Header.Set("X-Custom", "github.com/incogbyte")
 
 	if err != nil {
 		return false
@@ -120,12 +120,13 @@ func (s *Scan) IsAlive(url string) bool {
 	return false
 }
 
-//VerifyMethods verify methods xmlrpc
+// VerifyMethods verify methods xmlrpc
 func (s *Scan) VerifyMethods(url string) {
 
+	urlReq := url + "/xmlrpc.php"
 	cli := newClient()
 	body := "<methodCall> <methodName>system.listMethods</methodName> </methodCall>"
-	urlReq := url + "/xmlrpc.php"
+
 	req, err := http.NewRequest("POST", urlReq, bytes.NewBuffer([]byte(body)))
 	if err != nil {
 		log.Println(err)
@@ -187,7 +188,7 @@ func removeLastSlash(s string) string {
 	return target
 }
 
-//Ssrf testing ssrf if avaliable
+// Ssrf testing ssrf if avaliable
 func (s *Scan) Ssrf(target string) {
 
 	targetParsed := removeLastSlash(target)
@@ -196,8 +197,8 @@ func (s *Scan) Ssrf(target string) {
 
 	name := parseTargetName(targetParsed)
 	sv := parseTargetName(s.server)
-
-	parsedServer := "https://" + name + "." + sv
+	hash := utils.GenerateHashTracker()
+	parsedServer := "https://" + name + "." + hash + "." + sv
 	fmt.Println(parsedServer)
 
 	xml := utils.SSRF
@@ -206,6 +207,8 @@ func (s *Scan) Ssrf(target string) {
 	replaceTarget := strings.ReplaceAll(replaceServer, "$TARGET$", targetParsed)
 
 	body := replaceTarget
+
+	fmt.Println(body)
 
 	c := &http.Client{}
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(body)))
@@ -229,7 +232,7 @@ func (s *Scan) Ssrf(target string) {
 
 }
 
-//ProxyTesting testing oem proxyng server
+// ProxyTesting testing oem proxyng server
 func (s *Scan) ProxyTesting() {
 	client := newClient()
 
